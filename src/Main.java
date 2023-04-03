@@ -158,7 +158,8 @@ public class Main {
             while(rs.next()){
                 menuDist +=rs.getInt("ID")+" | " +rs.getString("First Name")+" | " +rs.getString("Last Name")
                         +" | " +rs.getString("Email")+" | " +rs.getString("Date")+" | " +rs.getString("Phone")
-                        +" | " +rs.getInt("Zipcode");
+                        +" | " +rs.getInt("Zipcode")
+                        + "\n";
             }
 
         }catch (SQLException e){System.out.println(e+"");
