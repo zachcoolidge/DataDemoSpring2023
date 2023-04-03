@@ -76,7 +76,7 @@ public class Main {
             case 'q':
                 break;
             case 'p':
-                printCustData(con);
+                println(printCustData(con));
                 break;
         }
 
