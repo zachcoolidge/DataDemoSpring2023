@@ -27,16 +27,16 @@ public class Main {
                 JTextField last_name = new JTextField();
                 JTextField email = new JTextField();
                 JTextField date = new JTextField();
-
-
-                Object [] fields = {"ID", jstudent_id,"First", jfirst_name,"Last", jlast_name, "Email", jemail};
+                JTextField phone = new JTextField();
+                JTextField zipcode = new JTextField();
+                Object [] fields = {"ID", cust_id,"First Name", first_name,"Last Name", last_name, "Email", email, "Date", date, "Phone", phone, "Zipcode", zipcode};
 
                 JFrame jf = new JFrame();
                 jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
 
                 JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
 
-                add_data(Integer.parseInt(jstudent_id.getText()), jfirst_name.getText(), jlast_name.getText(),jemail.getText());// getting the text from the input line 18-21
+                add_data(Integer.parseInt(cust_id.getText()), first_name.getText(), last_name.getText(),email.getText(), date.getText(), Integer.parseInt(phone.getText()),Integer.parseInt(zipcode.getText()));// getting the text from the input line 18-21
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'd':
@@ -72,17 +72,20 @@ public class Main {
         menu_output += " \n MENU\na - Add new customer\nd - Delete customer\nm - Modify Customer\np - Print customer information\nf - Find customer\nn - Number of customer\nq - Quit\n\n";
         return menu_output;
     }
-    public static void add_data(int studentid, String fname, String lname, String email){
+    public static void add_data(int custid, String fname, String lname, String email, String date, int phone, int zip){
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         try {
-            String sql = "INSERT INTO table1(First, Last, Email, ID) VALUES(?,?,?,?)"; // commands that it is sending to sql
+            String sql = "INSERT INTO customer info(ID, First Name, Last Name, Email, Date, Phone, Zipcode) VALUES(?,?,?,?,?,?,?)"; // commands that it is sending to sql
             ps = con.prepareStatement(sql);
 
-            ps.setString(1,fname);
-            ps.setString(2,lname);
-            ps.setString(3, email);
-            ps.setInt(4, studentid);// make sure the numbers are the exact values of columns in database, this will be put in column 4
+            ps.setInt(1,custid);
+            ps.setString(2,fname);
+            ps.setString(3, lname);
+            ps.setString(4, email);// make sure the numbers are the exact values of columns in database, this will be put in column 4
+            ps.setString(5,date);
+            ps.setInt(6, phone);
+            ps.setInt(7,zip);
             ps.execute();
             System.out.println("Data inserted");
         }catch (SQLException e){System.out.println(e+"");
