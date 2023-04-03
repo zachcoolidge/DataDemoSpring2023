@@ -363,10 +363,10 @@ public class Customer_Info_Data_Mgr_JBZ_ZTC {
         }
 
     }
-    public static <E> void print(E item){
+    private static <E> void print(E item){
         System.out.print(item);
     }
-    public static <E> void println(E item){
+    private static <E> void println(E item){
         System.out.println(item);
     }
 
