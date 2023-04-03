@@ -76,6 +76,7 @@ public class Main {
             case 'q':
                 break;
             case 'p':
+                printCustData(con);
                 break;
         }
 
@@ -146,6 +147,32 @@ public class Main {
                 System.out.println(e+"");
             }
         }
+    }
+    public static String printCustData(Connection con){
+        String menuDist="";
+        String sql = ("SELECT * FROM customer_info");
+        Statement stm= null;
+        try{
+            stm=con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+                menuDist +=rs.getInt("ID")+" | " +rs.getString("First Name")+" | " +rs.getString("Last Name")
+                        +" | " +rs.getString("Email")+" | " +rs.getString("Date")+" | " +rs.getString("Phone")
+                        +" | " +rs.getInt("Zipcode");
+            }
+
+        }catch (SQLException e){System.out.println(e+"");
+        } finally {
+            try {
+                assert stm != null; // confirms the stm is not null
+                stm.close();
+                con.close();
+            } catch (SQLException e){
+                System.out.println(e+"");
+            }
+        }
+        return menuDist;
+
     }
     public static void modCust(int choice,Connection conn, int cust_id){
         PreparedStatement ps;
