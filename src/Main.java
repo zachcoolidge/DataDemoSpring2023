@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         char input = ' ';
+        Connection con = DbConnection.connect();
         DbConnection.connect();
         while(input != 'q'){
             System.out.println(print_menu());
@@ -112,8 +113,7 @@ public class Main {
             }
         }
     }
-    public static void removeCustData(int custId){
-        Connection con = DbConnection.connect();
+    public static void removeCustData(int custId, Connection con){
         PreparedStatement ps = null;
         try {
             String sql = ("DELETE FROM customer_info WHERE ID="+custId);// commands that it is sending to sql
@@ -154,6 +154,7 @@ public class Main {
                 System.out.println(e+"");
             }
         }
+        return menuDist;
 
     }
     public static void modCust(int cust_id){
