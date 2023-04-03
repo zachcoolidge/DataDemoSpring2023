@@ -13,6 +13,7 @@ public class Main {
         Connection con = DbConnection.connect();
         Scanner in = new Scanner(System.in);
         char input = ' ';
+        Connection con = DbConnection.connect();
         DbConnection.connect();
         while(input != 'q'){
             System.out.println(print_menu());
@@ -176,6 +177,7 @@ public class Main {
             case 8:
 
         }
+        return menuDist;
 
     }
     public static <E> void print(E item){
