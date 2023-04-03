@@ -99,5 +99,14 @@ public class Main {
             }
         }
     }
+    public static void modCust(int cust_id){
+
+    }
+    public static <E> void print(E item){
+        System.out.print(item);
+    }
+    public static <E> void println(E item){
+        System.out.println(item);
+    }
 
 }
