@@ -40,7 +40,17 @@ public class Main {
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'd':
+                JTextField remove_id = new JTextField();
 
+                Object [] removeField = {"ID", remove_id};
+
+                JFrame jf2 = new JFrame();
+                jf2.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                JOptionPane.showConfirmDialog(jf2, removeField, "Insert ID", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
+
+                removeCustData(Integer.parseInt(remove_id.getText()));// getting the text from the input line 18-21
+                // error catching if someone puts a ! instead of id number
                 break;
             case 'm':
                 break;
@@ -92,6 +102,25 @@ public class Main {
             System.out.println("Data inserted");
         }catch (SQLException e){System.out.println(e+"");
     } finally {
+            try {
+                assert ps != null; // confirms the ps is not null
+                ps.close();
+                con.close();
+            } catch (SQLException e){
+                System.out.println(e+"");
+            }
+        }
+    }
+    public static void removeCustData(int custId){
+        Connection con = DbConnection.connect();
+        PreparedStatement ps = null;
+        try {
+            String sql = ("DELETE FROM customer_info WHERE ID="+custId);// commands that it is sending to sql
+            ps = con.prepareStatement(sql);
+            ps.execute();
+            System.out.println("Data deleted");
+        }catch (SQLException e){System.out.println(e+"");
+        } finally {
             try {
                 assert ps != null; // confirms the ps is not null
                 ps.close();
