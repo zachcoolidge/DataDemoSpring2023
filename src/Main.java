@@ -13,7 +13,6 @@ public class Main {
         Connection con = DbConnection.connect();
         Scanner in = new Scanner(System.in);
         char input = ' ';
-        Connection con = DbConnection.connect();
         DbConnection.connect();
         while(input != 'q'){
             System.out.println(print_menu());
@@ -151,7 +150,7 @@ public class Main {
     public static void modCust(int choice,Connection conn, int cust_id){
         PreparedStatement ps = null;
         String sql;
-        switch(choice){
+        switch(choice) {
             case 1:
                 try {
                     JTextField new_fname = new JTextField();
@@ -166,7 +165,9 @@ public class Main {
                     ps = conn.prepareStatement(sql);
                     ps.execute();
                     println("Name edited.");
-                }catch (SQLException e){println(""+e);}
+                } catch (SQLException e) {
+                    println("" + e);
+                }
 
             case 2:
             case 3:
@@ -177,7 +178,6 @@ public class Main {
             case 8:
 
         }
-        return menuDist;
 
     }
     public static <E> void print(E item){
