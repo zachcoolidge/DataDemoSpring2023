@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.util.Scanner;
 import java.sql.*;
 public class Main {
-    public static void main(String[] args) {//change
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         char input = ' ';
-        DbConnection.connect();
+        DbConnection.connect();//test change
         while(input != 'q'){
             System.out.println(print_menu());
             System.out.print("Choose Option: ");
