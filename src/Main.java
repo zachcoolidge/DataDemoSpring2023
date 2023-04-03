@@ -78,6 +78,8 @@ public class Main {
             case 'p':
                 println(printCustData(con));
                 break;
+            case 'n':
+                println("You have "+ customerCount(con)+ " customers");
         }
 
 
@@ -172,6 +174,30 @@ public class Main {
         return menuDist.toString();
 
     }
+    public static int customerCount(Connection con){
+        int count=0;
+        String sql = ("SELECT * FROM customer_info");
+        Statement stm= null;
+        try{
+            stm=con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+                count++  ;
+            }
+
+        }catch (SQLException e){System.out.println(e+"");
+        } finally {
+            try {
+                assert stm != null; // confirms the stm is not null
+                stm.close();
+                con.close();
+            } catch (SQLException e){
+                System.out.println(e+"");
+            }
+        }
+        return count;
+    }
+
     public static void modCust(int choice,Connection conn, int cust_id){
         PreparedStatement ps;
         String sql;
