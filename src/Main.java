@@ -139,7 +139,6 @@ public class Main {
             try {
                 assert ps != null; // confirms the ps is not null
                 ps.close();
-                con.close();
             } catch (SQLException e){
                 System.out.println(e+"");
             }
@@ -157,7 +156,6 @@ public class Main {
             try {
                 assert ps != null; // confirms the ps is not null
                 ps.close();
-                con.close();
             } catch (SQLException e){
                 System.out.println(e+"");
             }
@@ -179,7 +177,6 @@ public class Main {
             try {
                 assert stm != null; // confirms the stm is not null
                 stm.close();
-                con.close();
             } catch (SQLException e){
                 System.out.println(e+"");
             }
@@ -203,7 +200,6 @@ public class Main {
             try {
                 assert stm != null; // confirms the stm is not null
                 stm.close();
-                con.close();
             } catch (SQLException e){
                 System.out.println(e+"");
             }
@@ -212,7 +208,7 @@ public class Main {
     }
     public static String findCustomer(String name, Connection con){
         StringBuilder customer= new StringBuilder();
-        String sql = ("SELECT FROM customer_info WHERE 'First Name'=" + name);
+        String sql = ("SELECT * FROM customer_info");
 
         Statement stm= null;
         try{
@@ -239,7 +235,6 @@ public class Main {
             try {
                 assert stm != null; // confirms the stm is not null
                 stm.close();
-                con.close();
             } catch (SQLException e){
                 System.out.println(e+"");
             }
