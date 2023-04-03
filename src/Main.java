@@ -13,7 +13,6 @@ public class Main {
         Connection con = DbConnection.connect();
         Scanner in = new Scanner(System.in);
         char input = ' ';
-        Connection con = DbConnection.connect();
         DbConnection.connect();
         while(input != 'q'){
             System.out.println(print_menu());
@@ -77,6 +76,7 @@ public class Main {
             case 'q':
                 break;
             case 'p':
+                printCustData(con);
                 break;
         }
 
@@ -148,6 +148,32 @@ public class Main {
             }
         }
     }
+    public static String printCustData(Connection con){
+        String menuDist="";
+        String sql = ("SELECT * FROM customer_info");
+        Statement stm= null;
+        try{
+            stm=con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+                menuDist +=rs.getInt("ID")+" | " +rs.getString("First Name")+" | " +rs.getString("Last Name")
+                        +" | " +rs.getString("Email")+" | " +rs.getString("Date")+" | " +rs.getString("Phone")
+                        +" | " +rs.getInt("Zipcode")+"\n";
+            }
+
+        }catch (SQLException e){System.out.println(e+"");
+        } finally {
+            try {
+                assert stm != null; // confirms the stm is not null
+                stm.close();
+                con.close();
+            } catch (SQLException e){
+                System.out.println(e+"");
+            }
+        }
+        return menuDist;
+
+    }
     public static void modCust(int choice,Connection conn, int cust_id){
         PreparedStatement ps = null;
         String sql;
@@ -177,7 +203,6 @@ public class Main {
             case 8:
 
         }
-        return menuDist;
 
     }
     public static <E> void print(E item){
