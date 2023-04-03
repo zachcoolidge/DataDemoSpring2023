@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.util.Scanner;
 import java.sql.*;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) {//can you see this
         Scanner sc = new Scanner(System.in);
         char input = ' ';
         DbConnection.connect();
