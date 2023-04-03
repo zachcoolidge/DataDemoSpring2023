@@ -154,8 +154,8 @@ public class Main {
         switch(choice){
             case 1:
                 try {
-                    JTextField new_fname = new JTextField();//initializes new jtextfield;
-                    Object[] fields = new Object[]{"New Name", new_fname};//fields
+                    JTextField new_fname = new JTextField();
+                    Object[] fields = new Object[]{"New Name", new_fname};
 
                     JFrame jf = new JFrame();
                     jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
@@ -169,35 +169,7 @@ public class Main {
                 }catch (SQLException e){println(""+e);}
 
             case 2:
-                try {
-                    JTextField new_lname = new JTextField();//initializes new jtextfield;
-                    Object[] fields = new Object[]{"New Name", new_lname};//fields
-
-                    JFrame jf = new JFrame();
-                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
-
-                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
-                    sql = "UPDATE customer_info SET `Last Name`='" + new_lname.getText() + "' WHERE ID=" + cust_id;
-
-                    ps = conn.prepareStatement(sql);
-                    ps.execute();
-                    println("Name edited.");
-                }catch (SQLException e){println(""+e);}
             case 3:
-                try {
-                    JTextField new_email = new JTextField();//initializes new jtextfield;
-                    Object[] fields = new Object[]{"New email", new_email};//fields
-
-                    JFrame jf = new JFrame();
-                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
-
-                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
-                    sql = "UPDATE customer_info SET `Email`='" + new_email.getText() + "' WHERE ID=" + cust_id;
-
-                    ps = conn.prepareStatement(sql);
-                    ps.execute();
-                    println("Name edited.");
-                }catch (SQLException e){println(""+e);}
             case 4:
             case 5:
             case 6:
@@ -205,7 +177,7 @@ public class Main {
             case 8:
 
         }
-
+        return menuDist;
 
     }
     public static <E> void print(E item){
