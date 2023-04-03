@@ -16,7 +16,7 @@ public class Main {
         DbConnection.connect();
         while(input != 'q'){
             System.out.println(print_menu());
-            System.out.print("Choose Option: ");
+            print("Choose Option: ");
             input = in.next().charAt(0);
 
         if((input != 'a'&&input != 'd'&&input != 'm'&&input != 'p'&&input != 'f'&&input != 'n'&&input != 'q'))
@@ -148,7 +148,7 @@ public class Main {
         }
     }
     public static void modCust(int choice,Connection conn, int cust_id){
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         String sql;
         switch(choice) {
             case 1:
