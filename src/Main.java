@@ -2,7 +2,7 @@
  * Names: Zach Coolidge/Jose Blanco*
  ****** Class:CS490*****************
  ****** Term:Spring 2023************
- ****** Assignment: Project 4*******
+ ****** Assignment: Java Team Project*******
  ********************************/
 
 import javax.swing.*;
@@ -15,12 +15,9 @@ public class Main {
         char input = ' ';
         DbConnection.connect();
         while(input != 'q'){
-            System.out.println(print_menu());
+            println(print_menu());
             print("Choose Option: ");
             input = in.next().charAt(0);
-
-        if((input != 'a'&&input != 'd'&&input != 'm'&&input != 'p'&&input != 'f'&&input != 'n'&&input != 'q'))
-            System.out.println("Invalid Entry");
         switch (input){
             case 'a':
                 JTextField cust_id = new JTextField();
@@ -93,12 +90,13 @@ public class Main {
                 break;
             case 'n':
                 println("You have "+ customerCount(con)+ " customers");
+            default: println("Invalid entry. Try again.");
         }
 
 
         }
         con.close();
-        System.out.println("Program terminated.");
+        println("Program terminated.");
     }
 
     public static class DbConnection { //sets a connection up with DB browser and opens a specific file
@@ -108,8 +106,8 @@ public class Main {
             Connection con = null; //creating a connection object con and setting it to null
             try {
                 con = DriverManager.getConnection(data_base_location);// goes out to the file and open a connection to the file
-                System.out.println("Connected");
-            } catch(SQLException e){System.out.println(e+""); //e is a generic error message from SQLException
+                println("Connected");
+            } catch(SQLException e){println(e+""); //e is a generic error message from SQLException
         }
             return con;
     }
@@ -134,14 +132,14 @@ public class Main {
             ps.setString(6, phone);
             ps.setInt(7,zip);
             ps.execute();
-            System.out.println("Data inserted");
-        }catch (SQLException e){System.out.println(e+"");
+            println("Data inserted");
+        }catch (SQLException e){println(e+"");
     } finally {
             try {
                 assert ps != null; // confirms the ps is not null
                 ps.close();
             } catch (SQLException e){
-                System.out.println(e+"");
+                println(e+"");
             }
         }
     }
@@ -151,14 +149,14 @@ public class Main {
             String sql = ("DELETE FROM customer_info WHERE ID="+custId);// commands that it is sending to sql
             ps = con.prepareStatement(sql);
             ps.execute();
-            System.out.println("Data deleted");
-        }catch (SQLException e){System.out.println(e+"");
+            println("Data deleted");
+        }catch (SQLException e){println(e+"");
         } finally {
             try {
                 assert ps != null; // confirms the ps is not null
                 ps.close();
             } catch (SQLException e){
-                System.out.println(e+"");
+                println(e+"");
             }
         }
     }
@@ -173,7 +171,7 @@ public class Main {
                 menuDist.append(rs.getInt("ID")).append(" | ").append(rs.getString("First Name")).append(" | ").append(rs.getString("Last Name")).append(" | ").append(rs.getString("Email")).append(" | ").append(rs.getString("Date")).append(" | ").append(rs.getString("Phone")).append(" | ").append(rs.getInt("Zipcode")).append("\n");
             }
 
-        }catch (SQLException e){System.out.println(e+"");
+        }catch (SQLException e){println(e+"");
         }
         return menuDist.toString();
 
@@ -189,7 +187,7 @@ public class Main {
                 count++  ;
             }
 
-        }catch (SQLException e){System.out.println(e+"");
+        }catch (SQLException e){println(e+"");
         }
         return count;
     }
@@ -217,13 +215,13 @@ public class Main {
                 }
             }
 
-        }catch (SQLException e){System.out.println(e+"");
+        }catch (SQLException e){println(e+"");
         } finally {
             try {
                 assert stm != null; // confirms the stm is not null
                 stm.close();
             } catch (SQLException e){
-                System.out.println(e+"");
+                println(e+"");
             }
         }
 
@@ -360,7 +358,8 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
-            }
+                }
+            default -> println("Invalid entry. Try again.");
         }
 
     }
