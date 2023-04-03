@@ -54,24 +54,29 @@ public class Main {
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'm':
-                println("MENU");
-                println("1 - Modify first name");
-                println("2 - Modify last name");
-                println("3 - Modify email");
-                println("4 - Modify customer date");
-                println("5 - Modify phone number");
-                println("6 - Modify zip code");
-                println("7 - Modify customer ID");
-                println("8 - Return to main menu");
-                int choice = in.nextInt();
-                cust_id = new JTextField();
-                fields = new Object[]{"ID", cust_id};
+                int choice;
+                do {
+                    println("MENU");
+                    println("1 - Modify first name");
+                    println("2 - Modify last name");
+                    println("3 - Modify email");
+                    println("4 - Modify customer date");
+                    println("5 - Modify phone number");
+                    println("6 - Modify zip code");
+                    println("7 - Modify customer ID");
+                    println("8 - Return to main menu");
+                    choice = in.nextInt();
+                    if(choice!=8) {
+                        cust_id = new JTextField();
+                        fields = new Object[]{"ID", cust_id};
 
-                jf = new JFrame();
-                jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+                        jf = new JFrame();
+                        jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
 
-                JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
-                modCust(choice,con, Integer.parseInt(cust_id.getText()));
+                        JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
+                        modCust(choice, con, Integer.parseInt(cust_id.getText()));
+                    }
+                }while(choice!=8);
                 break;
             case 'q':
                 break;
@@ -201,8 +206,8 @@ public class Main {
     public static void modCust(int choice,Connection conn, int cust_id){
         PreparedStatement ps;
         String sql;
-        switch(choice) {
-            case 1:
+        switch (choice) {
+            case 1 -> {
                 try {
                     JTextField new_fname = new JTextField();
                     Object[] fields = new Object[]{"New Name", new_fname};
@@ -219,9 +224,8 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
-                break;
-
-            case 2:
+            }
+            case 2 -> {
                 try {
                     JTextField new_lname = new JTextField();
                     Object[] fields = new Object[]{"New Name", new_lname};
@@ -238,8 +242,8 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
-                break;
-            case 3:
+            }
+            case 3 -> {
                 try {
                     JTextField new_email = new JTextField();
                     Object[] fields = new Object[]{"New Email", new_email};
@@ -256,8 +260,8 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
-                break;
-            case 4:
+            }
+            case 4 -> {
                 try {
                     JTextField new_date = new JTextField();
                     Object[] fields = new Object[]{"New Date", new_date};
@@ -274,26 +278,26 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
-                break;
-            case 5:
-                try {
-                JTextField new_phone = new JTextField();
-                Object[] fields = new Object[]{"New Phone Number", new_phone};
-
-                JFrame jf = new JFrame();
-                jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
-
-                JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
-                sql = "UPDATE customer_info SET `Phone`='" + new_phone.getText() + "' WHERE ID=" + cust_id;
-
-                ps = conn.prepareStatement(sql);
-                ps.execute();
-                println("Phone Number edited.");
-            } catch (SQLException e) {
-                println("" + e);
             }
-                break;
-            case 6:
+            case 5 -> {
+                try {
+                    JTextField new_phone = new JTextField();
+                    Object[] fields = new Object[]{"New Phone Number", new_phone};
+
+                    JFrame jf = new JFrame();
+                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                    sql = "UPDATE customer_info SET `Phone`='" + new_phone.getText() + "' WHERE ID=" + cust_id;
+
+                    ps = conn.prepareStatement(sql);
+                    ps.execute();
+                    println("Phone Number edited.");
+                } catch (SQLException e) {
+                    println("" + e);
+                }
+            }
+            case 6 -> {
                 try {
                     JTextField new_zip = new JTextField();
                     Object[] fields = new Object[]{"New Zip code", new_zip};
@@ -310,8 +314,8 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
-                break;
-            case 7:
+            }
+            case 7 -> {
                 try {
                     JTextField new_ID = new JTextField();
                     Object[] fields = new Object[]{"New Customer ID", new_ID};
@@ -328,9 +332,7 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
-                break;
-            case 8:
-
+            }
         }
 
     }
