@@ -5,11 +5,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         char input = ' ';
-        DbConnection.connect();//test change
+        DbConnection.connect();
         while(input != 'q'){
             System.out.println(print_menu());
             System.out.print("Choose Option: ");
-            input = sc.next().charAt(0); //meow meow
+            input = sc.next().charAt(0);
 
         if((input != 'a'&&input != 'd'&&input != 'q'&&input != 'p'&&input != 'f'&&input != 'n'&&input != 'm'))
             System.out.println("Invalid Entry");
