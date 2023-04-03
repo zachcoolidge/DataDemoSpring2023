@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.util.Scanner;
 import java.sql.*;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Connection con = DbConnection.connect();
         Scanner in = new Scanner(System.in);
         char input = ' ';
@@ -97,6 +97,7 @@ public class Main {
 
 
         }
+        con.close();
         System.out.println("Program terminated.");
     }
 
@@ -164,7 +165,7 @@ public class Main {
     public static String printCustData(Connection con){
         StringBuilder menuDist= new StringBuilder();
         String sql = ("SELECT * FROM customer_info");
-        Statement stm= null;
+        Statement stm;
         try{
             stm=con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
@@ -173,13 +174,6 @@ public class Main {
             }
 
         }catch (SQLException e){System.out.println(e+"");
-        } finally {
-            try {
-                assert stm != null; // confirms the stm is not null
-                stm.close();
-            } catch (SQLException e){
-                System.out.println(e+"");
-            }
         }
         return menuDist.toString();
 
@@ -187,22 +181,15 @@ public class Main {
     public static int customerCount(Connection con){
         int count=0;
         String sql = ("SELECT * FROM customer_info");
-        Statement stm= null;
+        Statement stmnt;
         try{
-            stm=con.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
+            stmnt=con.createStatement();
+            ResultSet rs = stmnt.executeQuery(sql);
             while(rs.next()){
                 count++  ;
             }
 
         }catch (SQLException e){System.out.println(e+"");
-        } finally {
-            try {
-                assert stm != null; // confirms the stm is not null
-                stm.close();
-            } catch (SQLException e){
-                System.out.println(e+"");
-            }
         }
         return count;
     }
@@ -223,7 +210,7 @@ public class Main {
                     customer.append(rs.getInt("ID")).append(" | ").append(rs.getString("First Name")).append
                             (" | ").append(rs.getString("Last Name")).append(" | ").append(rs.getString("Email")).append(" | ").append(rs.getString("Date")).append(" | ").append(rs.getString("Phone")).append(" | ").append(rs.getInt("Zipcode")).append("\n");
                 }
-                if((rs.getString("First Name")+rs.getString("Last Name")).equals(name)
+                if((rs.getString("First Name")+" "+rs.getString("Last Name")).equals(name)
                 &&!(rs.getString("First Name").equals(name)) &&!(rs.getString("Last Name").equals(name))){
                     customer.append(rs.getInt("ID")).append(" | ").append(rs.getString("First Name")).append
                             (" | ").append(rs.getString("Last Name")).append(" | ").append(rs.getString("Email")).append(" | ").append(rs.getString("Date")).append(" | ").append(rs.getString("Phone")).append(" | ").append(rs.getInt("Zipcode")).append("\n");
