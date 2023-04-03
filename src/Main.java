@@ -9,7 +9,7 @@ public class Main {
         while(input != 'q'){
             System.out.println(print_menu());
             System.out.print("Choose Option: ");
-            input = sc.next().charAt(0);
+            input = sc.next().charAt(0); //meow meow
 
         if((input != 'a'&&input != 'd'&&input != 'q'&&input != 'p'&&input != 'f'&&input != 'n'&&input != 'm'))
             System.out.println("Invalid Entry");
