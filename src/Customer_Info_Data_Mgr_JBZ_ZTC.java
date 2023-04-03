@@ -8,7 +8,7 @@
 import javax.swing.*;
 import java.util.Scanner;
 import java.sql.*;
-public class Main {
+public class Customer_Info_Data_Mgr_JBZ_ZTC {
     public static void main(String[] args) throws SQLException {
         Connection con = DbConnection.connect();
         Scanner in = new Scanner(System.in);
