@@ -5,8 +5,6 @@
  ****** Assignment: Project 4*******
  ********************************/
 
-
-
 import javax.swing.*;
 import java.util.Scanner;
 import java.sql.*;
@@ -20,7 +18,7 @@ public class Main {
             System.out.print("Choose Option: ");
             input = sc.next().charAt(0);
 
-        if((input != 'a'&&input != 'd'&&input != 'q'&&input != 'p'&&input != 'f'&&input != 'n'&&input != 'm'))
+        if((input != 'a'&&input != 'd'&&input != 'm'&&input != 'p'&&input != 'f'&&input != 'n'&&input != 'q'))
             System.out.println("Invalid Entry");
         switch (input){
             case 'a':
