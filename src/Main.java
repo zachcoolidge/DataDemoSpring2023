@@ -50,7 +50,7 @@ public class Main {
 
                 JOptionPane.showConfirmDialog(jf2, removeField, "Insert ID", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
 
-                removeCustData(Integer.parseInt(remove_id.getText()));// getting the text from the input line 18-21
+                removeCustData(Integer.parseInt(remove_id.getText()), con);// getting the text from the input line 18-21
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'm':
