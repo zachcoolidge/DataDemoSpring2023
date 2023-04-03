@@ -189,15 +189,79 @@ public class Main {
 
                     ps = conn.prepareStatement(sql);
                     ps.execute();
-                    println("Name edited.");
+                    println("First name edited.");
                 } catch (SQLException e) {
                     println("" + e);
                 }
 
             case 2:
+                try {
+                    JTextField new_lname = new JTextField();
+                    Object[] fields = new Object[]{"New Name", new_lname};
+
+                    JFrame jf = new JFrame();
+                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                    sql = "UPDATE customer_info SET `Last Name`='" + new_lname.getText() + "' WHERE ID=" + cust_id;
+
+                    ps = conn.prepareStatement(sql);
+                    ps.execute();
+                    println("Last name edited.");
+                } catch (SQLException e) {
+                    println("" + e);
+                }
             case 3:
+                try {
+                    JTextField new_email = new JTextField();
+                    Object[] fields = new Object[]{"New Email", new_email};
+
+                    JFrame jf = new JFrame();
+                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                    sql = "UPDATE customer_info SET `Email`='" + new_email.getText() + "' WHERE ID=" + cust_id;
+
+                    ps = conn.prepareStatement(sql);
+                    ps.execute();
+                    println("Email edited.");
+                } catch (SQLException e) {
+                    println("" + e);
+                }
             case 4:
+                try {
+                    JTextField new_date = new JTextField();
+                    Object[] fields = new Object[]{"New Date", new_date};
+
+                    JFrame jf = new JFrame();
+                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                    sql = "UPDATE customer_info SET `Date`='" + new_date.getText() + "' WHERE ID=" + cust_id;
+
+                    ps = conn.prepareStatement(sql);
+                    ps.execute();
+                    println("Email edited.");
+                } catch (SQLException e) {
+                    println("" + e);
+                }
             case 5:
+                try {
+                JTextField new_phone = new JTextField();
+                Object[] fields = new Object[]{"New Phone Number", new_phone};
+
+                JFrame jf = new JFrame();
+                jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                sql = "UPDATE customer_info SET `Phone`='" + new_phone.getText() + "' WHERE ID=" + cust_id;
+
+                ps = conn.prepareStatement(sql);
+                ps.execute();
+                println("Phone Number edited.");
+            } catch (SQLException e) {
+                println("" + e);
+            }
             case 6:
             case 7:
             case 8:
