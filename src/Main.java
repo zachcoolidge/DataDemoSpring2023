@@ -103,7 +103,7 @@ public class Main {
         }
     public static String print_menu(){
         String menu_output = " ";
-        menu_output += " \n MENU\na - Add new customer\nd - Delete customer\nm - Modify Customer\np - Print customer information\nf - Find customer\nn - Number of customer\nq - Quit\n\n";
+        menu_output += " \n MENU\na - Add new customer\nd - Delete customer\nm - Modify Customer\np - Print customer information\nf - Find customer\nn - Number of customers\nq - Quit\n\n";
         return menu_output;
     }
     public static void addCustData(Connection con, int custid, String fname, String lname, String email, String date, String phone, int zip){
@@ -219,6 +219,7 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
+                break;
 
             case 2:
                 try {
@@ -237,6 +238,7 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
+                break;
             case 3:
                 try {
                     JTextField new_email = new JTextField();
@@ -254,6 +256,7 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
+                break;
             case 4:
                 try {
                     JTextField new_date = new JTextField();
@@ -271,6 +274,7 @@ public class Main {
                 } catch (SQLException e) {
                     println("" + e);
                 }
+                break;
             case 5:
                 try {
                 JTextField new_phone = new JTextField();
@@ -288,8 +292,43 @@ public class Main {
             } catch (SQLException e) {
                 println("" + e);
             }
+                break;
             case 6:
+                try {
+                    JTextField new_zip = new JTextField();
+                    Object[] fields = new Object[]{"New Zip code", new_zip};
+
+                    JFrame jf = new JFrame();
+                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                    sql = "UPDATE customer_info SET `Zipcode`='" + Integer.parseInt(new_zip.getText()) + "' WHERE ID=" + cust_id;
+
+                    ps = conn.prepareStatement(sql);
+                    ps.execute();
+                    println("Zip code edited.");
+                } catch (SQLException e) {
+                    println("" + e);
+                }
+                break;
             case 7:
+                try {
+                    JTextField new_ID = new JTextField();
+                    Object[] fields = new Object[]{"New Customer ID", new_ID};
+
+                    JFrame jf = new JFrame();
+                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                    sql = "UPDATE customer_info SET `ID`='" + Integer.parseInt(new_ID.getText()) + "' WHERE ID=" + cust_id;
+
+                    ps = conn.prepareStatement(sql);
+                    ps.execute();
+                    println("Zip code edited.");
+                } catch (SQLException e) {
+                    println("" + e);
+                }
+                break;
             case 8:
 
         }
