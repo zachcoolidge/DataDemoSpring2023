@@ -65,6 +65,7 @@ public class Main {
                     println("6 - Modify zip code");
                     println("7 - Modify customer ID");
                     println("8 - Return to main menu");
+                    print("Choose option: ");
                     choice = in.nextInt();
                     if(choice!=8) {
                         cust_id = new JTextField();
