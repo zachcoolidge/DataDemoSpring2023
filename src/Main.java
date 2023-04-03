@@ -10,22 +10,24 @@ import java.util.Scanner;
 import java.sql.*;
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         char input = ' ';
         DbConnection.connect();
         while(input != 'q'){
             System.out.println(print_menu());
             System.out.print("Choose Option: ");
-            input = sc.next().charAt(0);
+            input = in.next().charAt(0);
 
         if((input != 'a'&&input != 'd'&&input != 'm'&&input != 'p'&&input != 'f'&&input != 'n'&&input != 'q'))
             System.out.println("Invalid Entry");
         switch (input){
             case 'a':
-                JTextField jstudent_id = new JTextField();
-                JTextField jfirst_name = new JTextField();
-                JTextField jlast_name = new JTextField();
-                JTextField jemail = new JTextField();
+                JTextField cust_id = new JTextField();
+                JTextField first_name = new JTextField();
+                JTextField last_name = new JTextField();
+                JTextField email = new JTextField();
+                JTextField date = new JTextField();
+
 
                 Object [] fields = {"ID", jstudent_id,"First", jfirst_name,"Last", jlast_name, "Email", jemail};
 
@@ -42,7 +44,6 @@ public class Main {
             case 'm':
                 break;
             case 'q':
-                input = 'q';
                 break;
             case 'p':
                 break;
@@ -54,7 +55,7 @@ public class Main {
     }
 
     public static class DbConnection { //sets a connection up with DB browser and opens a specific file
-        private static final String data_base_location = "jdbc:sqlite:C:\\Users\\zachc\\Software Development\\sql\\example1db.db"; //java database connection
+        private static final String data_base_location = "jdbc:sqlite:C:\\Users\\zachc\\Software Development\\sql\\customer_info.db"; //java database connection
         public static Connection connect(){
             Connection con = null; //creating a connection object con and setting it to null
             try {
@@ -68,7 +69,7 @@ public class Main {
         }
     public static String print_menu(){
         String menu_output = " ";
-        menu_output += " \n MENU\nc - Create Database\nt - Create table\na - Add new row\nd - Delete row\nm - Modify Row\np - Print Table\nf - Find Row\nn - Number of Rows\nq - Quit\n\n";
+        menu_output += " \n MENU\na - Add new customer\nd - Delete customer\nm - Modify Customer\np - Print customer information\nf - Find customer\nn - Number of customer\nq - Quit\n\n";
         return menu_output;
     }
     public static void add_data(int studentid, String fname, String lname, String email){
