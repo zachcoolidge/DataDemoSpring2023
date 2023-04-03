@@ -36,7 +36,7 @@ public class Main {
 
                 JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
 
-                add_data(Integer.parseInt(cust_id.getText()), first_name.getText(), last_name.getText(),email.getText(), date.getText(), Integer.parseInt(phone.getText()),Integer.parseInt(zipcode.getText()));// getting the text from the input line 18-21
+                add_data(Integer.parseInt(cust_id.getText()), first_name.getText(), last_name.getText(),email.getText(), date.getText(), phone.getText(),Integer.parseInt(zipcode.getText()));// getting the text from the input line 18-21
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'd':
@@ -72,11 +72,11 @@ public class Main {
         menu_output += " \n MENU\na - Add new customer\nd - Delete customer\nm - Modify Customer\np - Print customer information\nf - Find customer\nn - Number of customer\nq - Quit\n\n";
         return menu_output;
     }
-    public static void add_data(int custid, String fname, String lname, String email, String date, int phone, int zip){
+    public static void add_data(int custid, String fname, String lname, String email, String date, String phone, int zip){
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         try {
-            String sql = "INSERT INTO customer info(ID, First Name, Last Name, Email, Date, Phone, Zipcode) VALUES(?,?,?,?,?,?,?)"; // commands that it is sending to sql
+            String sql = "INSERT INTO customer_info(ID, 'First Name', 'Last Name', Email, Date, Phone, Zipcode) VALUES(?,?,?,?,?,?,?)"; // commands that it is sending to sql
             ps = con.prepareStatement(sql);
 
             ps.setInt(1,custid);
@@ -84,7 +84,7 @@ public class Main {
             ps.setString(3, lname);
             ps.setString(4, email);// make sure the numbers are the exact values of columns in database, this will be put in column 4
             ps.setString(5,date);
-            ps.setInt(6, phone);
+            ps.setString(6, phone);
             ps.setInt(7,zip);
             ps.execute();
             System.out.println("Data inserted");
