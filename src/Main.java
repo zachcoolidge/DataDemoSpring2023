@@ -149,17 +149,14 @@ public class Main {
         }
     }
     public static String printCustData(Connection con){
-        String menuDist="";
+        StringBuilder menuDist= new StringBuilder();
         String sql = ("SELECT * FROM customer_info");
         Statement stm= null;
         try{
             stm=con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()){
-                menuDist +=rs.getInt("ID")+" | " +rs.getString("First Name")+" | " +rs.getString("Last Name")
-                        +" | " +rs.getString("Email")+" | " +rs.getString("Date")+" | " +rs.getString("Phone")
-                        +" | " +rs.getInt("Zipcode")
-                        + "\n";
+                menuDist.append(rs.getInt("ID")).append(" | ").append(rs.getString("First Name")).append(" | ").append(rs.getString("Last Name")).append(" | ").append(rs.getString("Email")).append(" | ").append(rs.getString("Date")).append(" | ").append(rs.getString("Phone")).append(" | ").append(rs.getInt("Zipcode")).append("\n");
             }
 
         }catch (SQLException e){System.out.println(e+"");
@@ -172,7 +169,7 @@ public class Main {
                 System.out.println(e+"");
             }
         }
-        return menuDist;
+        return menuDist.toString();
 
     }
     public static void modCust(int choice,Connection conn, int cust_id){
