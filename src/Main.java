@@ -40,6 +40,7 @@ public class Main {
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'd':
+
                 break;
             case 'm':
                 break;
@@ -56,6 +57,7 @@ public class Main {
 
     public static class DbConnection { //sets a connection up with DB browser and opens a specific file
         private static final String data_base_location = "jdbc:sqlite:C:\\Users\\zachc\\Software Development\\sql\\customer_info.db"; //java database connection
+        //C:\Users\Jose0\Documents\customer_info.db
         public static Connection connect(){
             Connection con = null; //creating a connection object con and setting it to null
             try {
