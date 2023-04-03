@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.sql.*;
 public class Main {
     public static void main(String[] args) {
+        Connection con = DbConnection.connect();
         Scanner in = new Scanner(System.in);
         char input = ' ';
         DbConnection.connect();
@@ -36,7 +37,7 @@ public class Main {
 
                 JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
 
-                addCustData(Integer.parseInt(cust_id.getText()), first_name.getText(), last_name.getText(),email.getText(), date.getText(), phone.getText(),Integer.parseInt(zipcode.getText()));// getting the text from the input line 18-21
+                addCustData(con, Integer.parseInt(cust_id.getText()), first_name.getText(), last_name.getText(),email.getText(), date.getText(), phone.getText(),Integer.parseInt(zipcode.getText()));// getting the text from the input line 18-21
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'd':
@@ -49,11 +50,28 @@ public class Main {
 
                 JOptionPane.showConfirmDialog(jf2, removeField, "Insert ID", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
 
-                removeCustData(Integer.parseInt(remove_id.getText()),con);// getting the text from the input line 18-21
+                removeCustData(Integer.parseInt(remove_id.getText()), con);// getting the text from the input line 18-21
                 // error catching if someone puts a ! instead of id number
                 break;
             case 'm':
-                printCustData(con);
+                println("MENU");
+                println("1 - Modify first name");
+                println("2 - Modify last name");
+                println("3 - Modify email");
+                println("4 - Modify customer date");
+                println("5 - Modify phone number");
+                println("6 - Modify zip code");
+                println("7 - Modify customer ID");
+                println("8 - Return to main menu");
+                int choice = in.nextInt();
+                cust_id = new JTextField();
+                fields = new Object[]{"ID", cust_id};
+
+                jf = new JFrame();
+                jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION); // cancels when you click the button ok
+                modCust(choice,con, Integer.parseInt(cust_id.getText()));
                 break;
             case 'q':
                 break;
@@ -81,12 +99,11 @@ public class Main {
 
         }
     public static String print_menu(){
-        String menu_output = "";
+        String menu_output = " ";
         menu_output += " \n MENU\na - Add new customer\nd - Delete customer\nm - Modify Customer\np - Print customer information\nf - Find customer\nn - Number of customer\nq - Quit\n\n";
         return menu_output;
     }
-    public static void addCustData(int custid, String fname, String lname, String email, String date, String phone, int zip){
-        Connection con = DbConnection.connect();
+    public static void addCustData(Connection con, int custid, String fname, String lname, String email, String date, String phone, int zip){
         PreparedStatement ps = null;
         try {
             String sql = "INSERT INTO customer_info(ID, 'First Name', 'Last Name', Email, Date, Phone, Zipcode) VALUES(?,?,?,?,?,?,?)"; // commands that it is sending to sql
@@ -112,8 +129,7 @@ public class Main {
             }
         }
     }
-    public static void removeCustData(int custId){
-        Connection con = DbConnection.connect();
+    public static void removeCustData(int custId, Connection con){
         PreparedStatement ps = null;
         try {
             String sql = ("DELETE FROM customer_info WHERE ID="+custId);// commands that it is sending to sql
@@ -131,32 +147,35 @@ public class Main {
             }
         }
     }
-    public static String printCustData(Connection con){
-        String menuDist="";
-        String sql = ("SELECT * FROM customer_info");
-        Statement stm= null;
-        try{
-            stm=con.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while(rs.next()){
-                menuDist +=rs.getInt("ID")+" | " +rs.getString("First Name")+" | " +rs.getString("Last Name")
-                        +" | " +rs.getString("Email")+" | " +rs.getString("Date")+" | " +rs.getString("Phone")
-                        +" | " +rs.getInt("Zipcode");
-            }
+    public static void modCust(int choice,Connection conn, int cust_id){
+        PreparedStatement ps = null;
+        String sql;
+        switch(choice){
+            case 1:
+                try {
+                    JTextField new_fname = new JTextField();
+                    Object[] fields = new Object[]{"New Name", new_fname};
 
-        }catch (SQLException e){System.out.println(e+"");
-        } finally {
-            try {
-                assert stm != null; // confirms the stm is not null
-                stm.close();
-                con.close();
-            } catch (SQLException e){
-                System.out.println(e+"");
-            }
+                    JFrame jf = new JFrame();
+                    jf.setAlwaysOnTop(true); // makes sure the frame pops to the top of screen
+
+                    JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                    sql = "UPDATE customer_info SET `First Name`='" + new_fname.getText() + "' WHERE ID=" + cust_id;
+
+                    ps = conn.prepareStatement(sql);
+                    ps.execute();
+                    println("Name edited.");
+                }catch (SQLException e){println(""+e);}
+
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+
         }
-
-    }
-    public static void modCust(int cust_id){
 
     }
     public static <E> void print(E item){
