@@ -79,7 +79,14 @@ public class Main {
                     }
                 }while(choice!=8);
                 break;
-            case 'q':
+            case 'f':
+                JTextField cust_name = new JTextField();
+                fields = new Object[]{"Name", cust_name};
+
+                jf = new JFrame();
+                jf.setAlwaysOnTop(true);
+                JOptionPane.showConfirmDialog(jf, fields, "Insert Record", JOptionPane.OK_CANCEL_OPTION);
+                println(findCustomer(cust_name.getText(),con));
                 break;
             case 'p':
                 println(printCustData(con));
@@ -202,6 +209,44 @@ public class Main {
             }
         }
         return count;
+    }
+    public static String findCustomer(String name, Connection con){
+        StringBuilder customer= new StringBuilder();
+        String sql = ("SELECT FROM customer_info WHERE 'First Name'=" + name);
+
+        Statement stm= null;
+        try{
+            stm=con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()) {
+                if(rs.getString("First Name").equals(name)){
+                    customer.append(rs.getInt("ID")).append(" | ").append(rs.getString("First Name")).append
+                            (" | ").append(rs.getString("Last Name")).append(" | ").append(rs.getString("Email")).append(" | ").append(rs.getString("Date")).append(" | ").append(rs.getString("Phone")).append(" | ").append(rs.getInt("Zipcode")).append("\n");
+                }
+                if(rs.getString("Last Name").equals(name)&&!(rs.getString("First Name").equals(name))){
+                    customer.append(rs.getInt("ID")).append(" | ").append(rs.getString("First Name")).append
+                            (" | ").append(rs.getString("Last Name")).append(" | ").append(rs.getString("Email")).append(" | ").append(rs.getString("Date")).append(" | ").append(rs.getString("Phone")).append(" | ").append(rs.getInt("Zipcode")).append("\n");
+                }
+                if((rs.getString("First Name")+rs.getString("Last Name")).equals(name)
+                &&!(rs.getString("First Name").equals(name)) &&!(rs.getString("Last Name").equals(name))){
+                    customer.append(rs.getInt("ID")).append(" | ").append(rs.getString("First Name")).append
+                            (" | ").append(rs.getString("Last Name")).append(" | ").append(rs.getString("Email")).append(" | ").append(rs.getString("Date")).append(" | ").append(rs.getString("Phone")).append(" | ").append(rs.getInt("Zipcode")).append("\n");
+                }
+            }
+
+        }catch (SQLException e){System.out.println(e+"");
+        } finally {
+            try {
+                assert stm != null; // confirms the stm is not null
+                stm.close();
+                con.close();
+            } catch (SQLException e){
+                System.out.println(e+"");
+            }
+        }
+
+        return customer.toString();
+
     }
 
     public static void modCust(int choice,Connection conn, int cust_id){
