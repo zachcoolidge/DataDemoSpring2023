@@ -90,6 +90,7 @@ public class Customer_Info_Data_Mgr_JBZ_ZTC {
                 break;
             case 'n':
                 println("You have "+ customerCount(con)+ " customers");
+                break;
             default: println("Invalid entry. Try again.");
         }
 
